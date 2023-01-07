@@ -1,20 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dbInputs from "../src/json/dbInputs.json";
-//  import { sendData } from "./aplication/sendData.js";
-import { saveData } from "./application/api";
-
-
+import { saveData, sendData } from "./application/api";
 import "./App.scss";
-// import Prueba from "./Prueba";
+
 
 
 const App = () => {
- 
- 
+  
   const { items } = dbInputs;
-  console.log(items);
+  // console.log(items);
   const [item, setItem] = useState("");
   const [check, setCheck] = useState(false);
+  const [person, setPerson] = useState(null);
+ 
+  useEffect(() => {
+    showData()
+  }, [])
+  
+
+  const showData = async () => {
+    const data = await sendData()
+      console.log(data.docs[1].data())
+     setPerson(data.docs) //para mapear hacer person.map(p => p.data())
+   
+
+  }
+ 
+ 
   
   const handleInputChange = (e) => {
    
@@ -60,7 +72,7 @@ const App = () => {
                     required={item.required}
                     className="form-select"
                   >
-                    {console.log(item)}
+                    {/* {console.log(item)} */}
                     {item.options.map((option) => {
                       return (
                         <option value={option.value} >{option.label}</option>
