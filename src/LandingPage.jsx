@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import dbInputs from "../src/json/dbInputs.json";
 import { saveData, sendData } from "./application/api";
 import Swal from "sweetalert2";
@@ -6,12 +7,15 @@ import "./App.scss";
 
 
 const LandingPage = () => {
+
+  
     const { items } = dbInputs;
     // console.log(items);
     const [item, setItem] = useState("");
     // const [check, setCheck] = useState(false);
     const [person, setPerson] = useState(null);
     const [alerta, setAlerta] = useState("");
+    const navigate = useNavigate();
     
     let emailRegex =
     /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
@@ -63,12 +67,19 @@ const LandingPage = () => {
       console.log(alerta)
       saveData(item)
       Swal.fire({
-        position: "center",
-        icon: "success",
-        title: `Se han enviado los datos de forma exitosa`,
-        showConfirmButton: true,
-        
-      });
+        title: 'Tus datos fueron guardados de forma exitosa',
+        // showDenyButton: true,
+        // showCancelButton: true,
+        confirmButtonText: 'Ver estadísticas',
+        // denyButtonText: `Don't save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          navigate('/get-data')
+        // } else if (result.isDenied) {
+        //   Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
      
       
       
