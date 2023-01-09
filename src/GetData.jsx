@@ -18,30 +18,36 @@ const GetData = () => {
     //_document.data.value.mapValue.fields.birth_date
   };
 
-  console.log(person);
+  
   return (
     <>
       <h1 >Estadísticas</h1>
       {person &&
         person?.map((p) => {
-          console.log(p);
+          {/* console.log(p); */}
           return (
             <>
               <div className="stats-box">
-                <p>
+                <p className="categoria-1">
                   Nombre completo:{" "}
-                  {p._document.data.value.mapValue.fields.full_name.stringValue}
+                  <strong>{p._document.data.value.mapValue.fields.full_name.stringValue}</strong>
                 </p>
-                <p>
+                <p className="categoria-2">
                   Email:{" "}
-                  {p._document.data.value.mapValue.fields.email.stringValue}
+                 <strong> {p._document.data.value.mapValue.fields.email.stringValue}</strong>
                 </p>
-                <p>
+                <p className="categoria-3">
                   Cumpleaños:{" "}
-                  {
+                  <strong>{
                     p._document.data.value.mapValue.fields.birth_date
                       .stringValue
-                  }
+                  }</strong>
+                </p>
+                <p className="categoria-3">
+                  Pais de origen:{" "}
+                  <strong>{
+                    p._document.data.value.mapValue.fields.country_of_origin.stringValue
+                  }</strong>
                 </p>
                 {/* <h4>¿Acepta terminos y condiciones?: {p._document.data.value.mapValue.fields.terms_and_conditions.stringValue}</h4>  */}
               </div>
