@@ -10,21 +10,6 @@
     
   }
 
-  // .categoria-1 {
-  //   background-color: black; /* Rojo */
-  //   color: #ffffff; /* Blanco */
-  // }
-  
-  // .categoria-2 {
-  //   background-color: black; /* Verde */
-  //   color: #ffffff; /* Blanco */
-  // }
-  
-  // .categoria-3 {
-  //   background-color: black; /* Azul */
-  //   color: #ffffff; /* Blanco */
-  // }
-
 
   @mixin hover {
     &:hover {
@@ -34,9 +19,7 @@
   }
 
 
-  
-
-  .button {
+   .button {
     background-color: #f44336;
     color: white;
   
