@@ -43,3 +43,54 @@
     border-color: #05060f;
   }
 }
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  &:hover {
+    
+      background-color: #45a049;
+    
+  }
+}
+
+.alert {
+  display: inline-block;
+  padding: 20px;
+  border: 1px solid #e3e3e3;
+  color: rgb(248, 241, 241);
+  background-color: #ec3b3b;
+  border-radius: 5px;
+  width: 100%;
+	max-width: 420px;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .form {
+    width: 100%;
+  }
+  .image {
+    width: 50%;
+  }
+  .text {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .container {
+    width: 80%;
+  }
+  .image {
+    width: 25%;
+  }
+  .text {
+    font-size: 20px;
+  }
+}

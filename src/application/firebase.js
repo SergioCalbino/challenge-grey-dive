@@ -11,6 +11,13 @@ const firebaseConfig = {
     appId: "1:315173892914:web:33f191ac33d384db1b9d2b"
   };
 
+  // apiKey: process.env.API_KEY,
+  //   authDomain: process.env.AUT_DOMAIN,
+  //   projectId: process.env.PROJECT_ID,
+  //   storageBucket: process.env.STORAGE_BUCKET,
+  //   messagingSenderId: process.env.MESSAGIN_IN_SEDER_ID,
+  //   appId: process.env.APP_ID
+
 const firebaseApp = initializeApp(firebaseConfig);
 export const db = getFirestore();
 export const auth = getAuth(firebaseApp);

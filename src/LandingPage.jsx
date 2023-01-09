@@ -16,9 +16,12 @@ const LandingPage = () => {
     const [alerta, setAlerta] = useState("");
     const navigate = useNavigate();
     
-    let emailRegex =
+    const emailRegex =
     /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
    
+    const nameRegex = /^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$/
+
+
     useEffect(() => {
       showData()
     }, [])
@@ -51,9 +54,21 @@ const LandingPage = () => {
       e.preventDefault()
       const { birth_date, country_of_origin, email, full_name, terms_and_conditions} = item
       
+      if (!full_name) {
+         setAlerta(
+          <h3 className="alert">
+           Debes ingresar un nombre
+          </h3>
+        );
+        setTimeout(() => {
+          setAlerta("");
+        }, 3000);
+  
+        return;
+      }
       if (full_name.length < 5) {
          setAlerta(
-          <h3 className="alert alert-danger" role="alert">
+          <h3 className="alert">
             El nombre completo debe tener mas de 6 letras
           </h3>
         );
@@ -64,9 +79,21 @@ const LandingPage = () => {
         return;
       }
 
+      if (!nameRegex.test(full_name)) {
+        setAlerta(
+          <h3 className="alert">
+            El nombre ingresado contiene caracteres inválidos
+          </h3>
+        );
+        setTimeout(() => {
+          setAlerta("");
+        }, 3000);
+        return;
+      }
+      
       if (!emailRegex.test(email)) {
         setAlerta(
-          <h3 className="alert alert-danger" role="alert">
+          <h3 className="alert">
             El email ingresado no contiene caracteres válidos
           </h3>
         );
@@ -76,9 +103,9 @@ const LandingPage = () => {
         return;
       }
 
-      if (country_of_origin === '' || !country_of_origin) {
+      if (country_of_origin === '' || !country_of_origin || country_of_origin === '----Selecciona----') {
         setAlerta(
-         <h3 className="alert alert-danger" role="alert">
+         <h3 className="alert">
            Debe seleccionar su país de origen
          </h3>
        );
@@ -90,7 +117,7 @@ const LandingPage = () => {
      }
       if (birth_date === '' || !birth_date) {
         setAlerta(
-         <h3 className="alert alert-danger" role="alert">
+         <h3 className="alert">
            Debe seleccionar tu fecha de nacimiento
          </h3>
        );
@@ -100,9 +127,9 @@ const LandingPage = () => {
  
        return;
      }
-      if (terms_and_conditions === '' || !terms_and_conditions) {
+      if (terms_and_conditions === false) {
         setAlerta(
-         <h3 className="alert alert-danger" role="alert">
+         <h3 className="alert">
            Debe aceptar los terminos y condiciones
          </h3>
        );
@@ -177,6 +204,7 @@ const LandingPage = () => {
                       type={item.type}
                       value={item.value}
                       onChange={handleInputChange}
+                      maxLength={30}
                       
                     />
                     

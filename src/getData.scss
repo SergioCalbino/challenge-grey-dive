@@ -28,13 +28,17 @@
 
   @mixin hover {
     &:hover {
-      background-color: darkblue;
+      background-color:#EB455F
+  
     }
   }
 
+
+  
+
   .button {
-    background-color: blue;
-  color: white;
+    background-color: #f44336;
+    color: white;
   
     
     border: none;
