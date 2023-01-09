@@ -12,14 +12,12 @@ const LandingPage = () => {
     const { items } = dbInputs;
     // console.log(items);
     const [item, setItem] = useState("");
-    // const [check, setCheck] = useState(false);
     const [person, setPerson] = useState(null);
     const [alerta, setAlerta] = useState("");
     const navigate = useNavigate();
     
     let emailRegex =
     /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
-  
    
     useEffect(() => {
       showData()
@@ -28,14 +26,12 @@ const LandingPage = () => {
   
     const showData = async () => {
       const data = await sendData()
-        console.log(data.docs[1].data())
+        // console.log(data.docs[1].data())
        setPerson(data.docs) //para mapear hacer person.map(p => p.data())
-     
+  }
+
   
-    }
    
-   
-    
     const handleInputChange = (e) => {
      
       const target = e.target;
@@ -46,26 +42,79 @@ const LandingPage = () => {
         ...item,
         [name]: value
       })
-      console.log(item)
-      
-    }
+  }
     
+
+  
+
     const handleSubmit = async (e) => {
       e.preventDefault()
       const { birth_date, country_of_origin, email, full_name, terms_and_conditions} = item
-      // console.log(full_name)
-      if ([birth_date, country_of_origin, email, full_name, terms_and_conditions].includes('')) {
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: `Todos los campos son obligatorios`,
-          showConfirmButton: false,
-          timer: 2500,
-        });
-       
-      } 
-      console.log(alerta)
-      saveData(item)
+      
+      if (full_name.length < 5) {
+         setAlerta(
+          <h3 className="alert alert-danger" role="alert">
+            El nombre completo debe tener mas de 6 letras
+          </h3>
+        );
+        setTimeout(() => {
+          setAlerta("");
+        }, 3000);
+  
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        setAlerta(
+          <h3 className="alert alert-danger" role="alert">
+            El email ingresado no contiene caracteres válidos
+          </h3>
+        );
+        setTimeout(() => {
+          setAlerta("");
+        }, 3000);
+        return;
+      }
+
+      if (country_of_origin === '' || !country_of_origin) {
+        setAlerta(
+         <h3 className="alert alert-danger" role="alert">
+           Debe seleccionar su país de origen
+         </h3>
+       );
+       setTimeout(() => {
+         setAlerta("");
+       }, 3000);
+ 
+       return;
+     }
+      if (birth_date === '' || !birth_date) {
+        setAlerta(
+         <h3 className="alert alert-danger" role="alert">
+           Debe seleccionar tu fecha de nacimiento
+         </h3>
+       );
+       setTimeout(() => {
+         setAlerta("");
+       }, 3000);
+ 
+       return;
+     }
+      if (terms_and_conditions === '' || !terms_and_conditions) {
+        setAlerta(
+         <h3 className="alert alert-danger" role="alert">
+           Debe aceptar los terminos y condiciones
+         </h3>
+       );
+       setTimeout(() => {
+         setAlerta("");
+       }, 3000);
+ 
+       return;
+     }
+      
+      
+     await saveData(item)
       Swal.fire({
         title: 'Tus datos fueron guardados de forma exitosa',
         // showDenyButton: true,
@@ -91,15 +140,17 @@ const LandingPage = () => {
     return (
       <>
         <div className="App">
+         
           <h1> Ingresa tus datos </h1>
           <form type="submit" onSubmit={handleSubmit} >
             {items.map((item) => {
               return (
                 <div className="form"  >
-                  {alerta}
+                  
                   <label className="form-check-label" htmlFor="defaultCheck1">
                     {item.label}
                   </label>
+                 
                  
                   {item.type === "select" ? (
                     <select 
@@ -110,6 +161,7 @@ const LandingPage = () => {
                       className="form-select"
                     >
                       {/* {console.log(item)} */}
+                      <option>----Selecciona----</option>
                       {item.options.map((option) => {
                         return (
                           <option value={option.value} >{option.label}</option>
@@ -126,15 +178,16 @@ const LandingPage = () => {
                       value={item.value}
                       onChange={handleInputChange}
                       
-                      // checked={check}
                     />
+                    
                   )}
+              
                   
-                {/* <button onClick={handleSubmit} >Enviar</button> */}
                 </div>
               );
             })}
           </form>
+          {alerta}
         </div>
       </>
     );
