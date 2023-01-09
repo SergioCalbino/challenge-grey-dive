@@ -5,7 +5,10 @@
 	margin: 0 auto;
 	padding: 2rem;
 	text-align: center;
+ 
 }
+
+
 
 .form {
 	display: flex;
@@ -71,22 +74,44 @@ input[type="submit"] {
   align-items: center;
 }
 
-@media only screen and (max-width: 600px) {
-  .form {
-    width: 100%;
+@media screen and (max-width: 760px){
+  #root{
+      width: 90%;
+      justify-content: center;
   }
-  .form-input {
-    width: 100%;
+  .form{
+      width: 60%;
+  }
+ 
+}
+
+@media screen and (max-width: 480px){
+  #root{
+      height: auto;
+      justify-content: center;
+  }
+  .form{
+      width: auto;
   }
   
 }
 
-@media only screen and (min-width: 601px) {
-  .form {
-    width: 80%;
-  }
-  // .form-input {
-  //   width: 35%;
-  // }
+// @media only screen and (max-width: 480px) {
+//   .form {
+//     width: 100%;
+//   }
+//   .form-input {
+//     width: 100%;
+//   }
+  
+// }
+
+// @media only screen and (min-width: 601px) {
+//   .form {
+//     width: 80%;
+//   }
+//   .form-input {
+//     width: 35%;
+//   }
  
-}
+// }
