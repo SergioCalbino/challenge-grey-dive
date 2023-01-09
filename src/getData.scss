@@ -35,3 +35,25 @@
     @include hover;
   }
   
+
+  @media screen and (max-width: 760px){
+    .stats-box{
+        width: 80%;
+        justify-content: center;
+    }
+    .button{
+        width: 60%;
+    }
+   
+  }
+  
+  @media screen and (max-width: 480px){
+    .stats-box{
+        height: auto;
+        justify-content: center;
+    }
+    .button{
+        width: auto;
+    }
+    
+  }
