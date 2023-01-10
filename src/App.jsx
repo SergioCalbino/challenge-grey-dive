@@ -1,9 +1,8 @@
 
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import GetData from "./GetData.jsx";
 import LandingPage from "./LandingPage.jsx";
 
-// import "./App.scss";
 
 
 
