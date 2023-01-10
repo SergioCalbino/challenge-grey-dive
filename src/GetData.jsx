@@ -23,11 +23,11 @@ const GetData = () => {
     <>
       <h1 >Estadísticas</h1>
       {person &&
-        person?.map((p) => {
+        person?.map((p,i) => {
           {/* console.log(p); */}
           return (
-            <>
-              <div className="stats-box">
+            
+              <div key={i} className="stats-box">
                 <p className="categoria-1">
                   Nombre completo:{" "}
                   <strong>{p._document.data.value.mapValue.fields.full_name.stringValue}</strong>
@@ -51,7 +51,7 @@ const GetData = () => {
                 </p>
                 {/* <h4>¿Acepta terminos y condiciones?: {p._document.data.value.mapValue.fields.terms_and_conditions.stringValue}</h4>  */}
               </div>
-            </>
+            
           );
         })}
         <div>

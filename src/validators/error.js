@@ -1,34 +1,41 @@
 
-export const validator = (input) => {
- 
+export const validator = (input, value) => {
+  console.log(input,value)
+    const emailRegex =
+  /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
+    const nameRegex = /^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$/
+    const currentDate = new Date()
+    const dateIso = currentDate.toISOString()
+    const dateIsoSubs = dateIso.substring(0,10)
+
+
     let error = {};
     
-    if (!input.name) error.name = "Name is required";
-    if (!/^[a-zA-Z ]*$/.test(input.name))
-      error.name = "Name is invalid: must be letters only";
-    if (input.name.length > 20 || input.name.length < 3)
-      error.name = "Name must be between 3 and 20 characters";
+    if (input === 'full_name' && value.length < 5) {
+      error[input] = 'El nombre ingresado debe ser mayor a 5 caracteres'
+    }
     
-    if (input.life <= 0 || input.life >= 200)
-      error.life = "Allowable values ​​must be greater than 0 and less than 200";
+    if (input === 'full_name' && !nameRegex.test(value)) {
+      error[input] = 'El nombre solo debe contener letras'
+    }
+    if (input === 'email' && !emailRegex.test(value)) {
+      error.email = 'El formato del email no es válido'
+      
+    }
+    if (input === 'birth_date' && value > dateIsoSubs) {
+      error.birth_date = 'La fecha de nacimiento no puede ser mayor al dia actual'
+      
+    }
+    if (input === 'country_of_origin' && value === undefined ) {
+      console.log("🚀 ~ file: error.js:30 ~ validator ~ value", value)
+      error.country_of_origin = 'Debe seleccionar un país de origen'
+      
+    }
+    if (input === 'checkbox' && value === false) {
+      error.checkbox = 'Debe aceptar los terminos y condiciones'
+      
+    }
     
-    if (input.strength <= 0 || input.strength >= 150)
-      error.strength = "Allowable values ​​must be greater than 0 and less than 150";
-    
-    if (input.defense <= 0 || input.defense >= 200)
-      error.defense =
-        "Allowable values ​​must be greater than 0 and less than 200";
-    
-    if (input.speed <= 0 || input.speed >= 150)
-      error.speed = "Allowable values ​​must be greater than 0 and less than 150";
-    
-    if (input.height <= 0 || input.height >= 150)
-      error.height =
-        "Allowable values ​​must be greater than 0 and less than 150";
-    
-    if (input.weight <= 0 || input.weight >= 300)
-      error.weight =
-        "Allowable values ​​must be greater than 0 and less than 300";
     
     
     
