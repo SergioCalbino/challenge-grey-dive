@@ -3,20 +3,20 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAQ8azfpuRxE2Yq79JHXSxXO_Q9RcAZtJ8",
-    authDomain: "challenge-grey-dive.firebaseapp.com",
-    projectId: "challenge-grey-dive",
-    storageBucket: "challenge-grey-dive.appspot.com",
-    messagingSenderId: "315173892914",
-    appId: "1:315173892914:web:33f191ac33d384db1b9d2b"
+    // apiKey: "AIzaSyAQ8azfpuRxE2Yq79JHXSxXO_Q9RcAZtJ8",
+    // authDomain: "challenge-grey-dive.firebaseapp.com",
+    // projectId: "challenge-grey-dive",
+    // storageBucket: "challenge-grey-dive.appspot.com",
+    // messagingSenderId: "315173892914",
+    // appId: "1:315173892914:web:33f191ac33d384db1b9d2b"
+    apiKey:process.env.REACT_APP_apiKey,
+    authDomain:process.env.REACT_APP_authDomain,
+    projectId:process.env.REACT_APP_projectId,
+    storageBucket:process.env.REACT_APP_storageBucket,
+    messagingSenderId:process.env.REACT_APP_messagingSenderId,
+    appId:process.env.REACT_APP_appId,
   };
 
-  // apiKey: process.env.API_KEY,
-  //   authDomain: process.env.AUT_DOMAIN,
-  //   projectId: process.env.PROJECT_ID,
-  //   storageBucket: process.env.STORAGE_BUCKET,
-  //   messagingSenderId: process.env.MESSAGIN_IN_SEDER_ID,
-  //   appId: process.env.APP_ID
 
 const firebaseApp = initializeApp(firebaseConfig);
 export const db = getFirestore();
