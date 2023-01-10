@@ -12,8 +12,12 @@ export const validator = (input, value) => {
     let error = {};
     
     if (input === 'full_name' && value.length < 5) {
+      console.log("🚀 ~ file: error.js:15 ~ validator ~ value", value)
+      console.log("🚀 ~ file: error.js:15 ~ validator ~ input", input)
       error[input] = 'El nombre ingresado debe ser mayor a 5 caracteres'
+    
     }
+
     
     if (input === 'full_name' && !nameRegex.test(value)) {
       error[input] = 'El nombre solo debe contener letras'
