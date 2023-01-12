@@ -27,10 +27,14 @@ export const validator = (input, value) => {
     error.birth_date =
       "La fecha de nacimiento no puede ser mayor al dia actual";
   }
+  
   if (input === "birth_date" && !moment(value, dateIsoSubs, true).isValid()) {
-    console.log(value)
+    error.birth_date = '' 
+  } else {
+
     error.birth_date = "La fecha de nacimiento es invalida";
   }
+  
   if (input === "country_of_origin" && value === undefined) {
     error.country_of_origin = "Debe seleccionar un país de origen";
   }
