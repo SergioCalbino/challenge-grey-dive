@@ -1,10 +1,15 @@
+import moment from 'moment';
+
 export const validator = (input, value) => {
+
+
   const emailRegex =
     /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
   const nameRegex = /^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$/;
   const currentDate = new Date();
   const dateIso = currentDate.toISOString();
   const dateIsoSubs = dateIso.substring(0, 10);
+
 
   let error = {};
 
@@ -21,6 +26,10 @@ export const validator = (input, value) => {
   if (input === "birth_date" && value > dateIsoSubs) {
     error.birth_date =
       "La fecha de nacimiento no puede ser mayor al dia actual";
+  }
+  if (input === "birth_date" && !moment(value, dateIsoSubs, true).isValid()) {
+    console.log(value)
+    error.birth_date = "La fecha de nacimiento es invalida";
   }
   if (input === "country_of_origin" && value === undefined) {
     error.country_of_origin = "Debe seleccionar un país de origen";

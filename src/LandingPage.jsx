@@ -5,6 +5,7 @@ import { saveData } from "./application/api";
 import Swal from "sweetalert2";
 import "./App.scss";
 import { validator } from "./validators/error";
+import moment from 'moment';
 
 
 
@@ -19,7 +20,6 @@ const LandingPage = () => {
     /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
 
   const nameRegex = /^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$/;
-
   const currentDate = new Date();
   const dateIso = currentDate.toISOString();
   const dateIsoSubs = dateIso.substring(0, 10);
@@ -110,6 +110,20 @@ const LandingPage = () => {
       setAlerta(
         <h3 className="alert">
           La fecha de nacimiento no puede ser mayor al dia actual
+        </h3>
+      );
+      setTimeout(() => {
+        setAlerta("");
+      }, 3000);
+
+      return;
+    }
+    
+    if (!moment(birth_date, dateIsoSubs, true).isValid()) {
+      
+      setAlerta(
+        <h3 className="alert">
+          La fecha de nacimiento ingresasa es invalida
         </h3>
       );
       setTimeout(() => {
